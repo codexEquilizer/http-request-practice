@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'http-request-practice';
+  loadedPosts = [];
+  @ViewChild('postForm', { static: false }) postData: NgForm;
+
+  onCreatePost(postData: { title: string, content: string }) {
+    console.log(postData);
+    this.postData.reset();
+
+    //Send Http Request
+  }
+
+  onFetchPosts() {
+    //Send Http request
+  }
+
+  onClearPosts() {
+    // Send Http request
+  }
 }
