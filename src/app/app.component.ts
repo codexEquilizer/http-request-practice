@@ -10,15 +10,13 @@ import { Post } from './post.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   loadedPosts = [];
+  isFetching = false;
+
   @ViewChild('postForm', { static: false }) postData: NgForm;
 
   constructor(private http: HttpClient) { }
-
-  ngOnChanges(): void {
-    this.loadedPosts;
-  }
 
   ngOnInit(): void {
     this.fetchPosts();
@@ -44,6 +42,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   private fetchPosts() {
+    this.isFetching = true;
     this.http.get<{ [key: string]: Post }>('https://ng-complete-guide-5eca2-default-rtdb.firebaseio.com/posts.json')
       .pipe(
         map(responseData => {
@@ -60,6 +59,7 @@ export class AppComponent implements OnInit, OnChanges {
         }))
       .subscribe(posts => {
         console.log(posts);
+        this.isFetching = false;
         this.loadedPosts = posts;
       })
   }
