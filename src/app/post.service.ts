@@ -51,6 +51,7 @@ export class PostsService {
         return this.http.delete('https://ng-complete-guide-5eca2-default-rtdb.firebaseio.com/posts.json', {
             observe: 'events'
         }).pipe(
+            // tap operator is used to just look into the response without modifying it
             tap(event => {
                 console.log(event);
                 if (event.type === HttpEventType.Sent) {
