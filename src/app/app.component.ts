@@ -12,6 +12,7 @@ import { PostsService } from './post.service';
 export class AppComponent implements OnInit {
   loadedPosts = [];
   isFetching = false;
+  error = null;
 
   @ViewChild('postForm', { static: false }) postData: NgForm;
 
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit {
       console.log(posts);
       this.isFetching = false;
       this.loadedPosts = posts;
+    }, error => {
+      this.error = error.message;
     })
   }
 
@@ -43,6 +46,8 @@ export class AppComponent implements OnInit {
       console.log(posts);
       this.isFetching = false;
       this.loadedPosts = posts;
+    }, error => {
+      this.error = error.message;
     })
   }
 
